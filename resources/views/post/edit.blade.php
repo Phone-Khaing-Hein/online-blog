@@ -47,6 +47,30 @@
                                 <button class="btn btn-primary">Update Post</button>
                             </div>
                         </form>
+                        <hr>
+                        <form action="{{route('photo.store')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="photo">Post Image</label>
+                                <input type="file" id="photo" value="{{old('photo')}}" name="photo[]" multiple class="form-control @error('photo') is-invalid @enderror">
+                                @error('photo')
+                                <p class="text-danger small">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <button class="btn btn-primary">Upload new photo</button>
+                        </form>
+                        @forelse($post->photos as $photo)
+                            <img src="{{asset('storage/photo/'.$photo->name)}}" height="100" alt="" class="d-block">
+                            <form action="{{route('photo.destroy',$photo->id)}}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger btn-sm img-del-btn">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        @empty
+                            No Photo
+                        @endforelse
                     </div>
                 </div>
             </div>

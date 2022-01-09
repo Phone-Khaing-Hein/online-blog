@@ -9,7 +9,7 @@
                         <h4 class="mb-0">Create Post</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('post.store')}}" method="post">
+                        <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                                 <div class="mb-3">
                                     <label for="title">Post Title</label>
@@ -30,6 +30,13 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
+                                    <label for="photo">Post Image</label>
+                                    <input type="file" id="photo" value="{{old('photo')}}" name="photo[]" multiple class="form-control @error('photo') is-invalid @enderror">
+                                    @error('photo')
+                                    <p class="text-danger small">{{$message}}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
                                     <label for="description">Post Title</label>
                                     <textarea type="text" id="description" rows="10" name="description" class="form-control @error('description') is-invalid @enderror">
                                         {{old('description')}}
@@ -46,6 +53,16 @@
                                     <button class="btn btn-primary">Create Post</button>
                                 </div>
                         </form>
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
