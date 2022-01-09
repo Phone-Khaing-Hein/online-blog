@@ -18,7 +18,7 @@
 
                                 </div>
                                 <div class="col-6 col-lg-3">
-                                    <button class="btn btn-primary">Add Category</button>
+                                    <button class="btn btn-primary">Create Category</button>
                                 </div>
                                 @error('title')
                                     <p class="text-danger small">{{$message}}</p>
