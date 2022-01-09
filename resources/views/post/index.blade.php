@@ -37,7 +37,8 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Title</th>
+                                <th class="w-25">Title</th>
+                                <th>Photo</th>
                                 <th>Is Publish</th>
                                 <th>Category</th>
                                 <th>Owner</th>
@@ -49,7 +50,14 @@
                             @forelse($posts as $post)
                                 <tr>
                                     <td>{{$post->id}}</td>
-                                    <td class="w-25 small">{{Str::words($post->title,10,'...')}}</td>
+                                    <td class="w-25 small">{{Str::words($post->title,10,'...')}}</td>\
+                                    <td>
+                                        @forelse($post->photos as $photo)
+                                            <img src="{{asset('storage/photo/'.$photo->name)}}" height="30" alt="">
+                                        @empty
+                                            No Photo
+                                        @endforelse
+                                    </td>
                                     <td>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" {{$post->is_publish ? 'checked' : ''}}>
@@ -88,7 +96,7 @@
 
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">There is no Post</td>
+                                    <td colspan="8" class="text-center">There is no Post</td>
                                 </tr>
                             @endforelse
                             </tbody>
