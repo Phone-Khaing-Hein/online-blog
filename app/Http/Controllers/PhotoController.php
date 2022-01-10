@@ -114,6 +114,6 @@ class PhotoController extends Controller
         Storage::delete('public/thumbnail/'.$photo->name);
         $photo->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('status','Photo deleted successfully');
     }
 }
