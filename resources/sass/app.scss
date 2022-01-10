@@ -7,9 +7,18 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~venobox/dist/venobox.min.css";
 
 .photo-uploader-ui{
     border: 2px dashed gray;
     width: 100px;
     height: 100px;
+}
+
+.list-thumbnail{
+    margin-left: -20px;
+}
+
+.list-thumbnail:first-child{
+    margin-left: 0px;
 }

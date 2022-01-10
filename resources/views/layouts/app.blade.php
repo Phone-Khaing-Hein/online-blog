@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -42,6 +39,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{route('category.index') == request()->url() ? 'active' : ''}}" aria-current="page" href="{{ route('category.index') }}">Category List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{route('post.index') == request()->url() ? 'active' : ''}}" aria-current="page" href="{{ route('post.index') }}">Post List</a>
                         </li>
                     </ul>
                     @endauth
@@ -88,5 +88,32 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    @if(session('status'))
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: '{{session('status')}}'
+        })
+    </script>
+    @endif
+    <script>
+        new VenoBox({
+            selector: '.venobox'
+        });
+    </script>
 </body>
 </html>
