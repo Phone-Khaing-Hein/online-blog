@@ -11291,6 +11291,8 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.img-del-btn {
-  margin-top: -55px;
+.photo-uploader-ui {
+  border: 2px dashed gray;
+  width: 100px;
+  height: 100px;
 }

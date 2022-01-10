@@ -40,7 +40,8 @@ class PhotoController extends Controller
     public function store(StorePhotoRequest $request)
     {
         $request->validate([
-            'photo'=>'nullable',
+            'post_id'=>'required|integer',
+            'photo'=>'required',
             'photo.*'=>'file|mimes:jpg,jpeg,png'
         ]);
 
@@ -58,7 +59,11 @@ class PhotoController extends Controller
                 //save in db
                 $photo = new Photo();
                 $photo->name = $newName;
+                $photo->user_id = Auth::id();
+                $photo->post_id = $request->post_id;
                 $photo->save();
+
+                return redirect()->back();
             }
         }
     }

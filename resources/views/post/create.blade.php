@@ -12,14 +12,14 @@
                         <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                                 <div class="mb-3">
-                                    <label for="title">Post Title</label>
+                                    <label for="title" class="form-label">Post Title</label>
                                     <input type="text" id="title" value="{{old('title')}}" name="title" class="form-control @error('title') is-invalid @enderror">
                                     @error('title')
                                     <p class="text-danger small">{{$message}}</p>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="category">Category</label>
+                                    <label for="category" class="form-label">Category</label>
                                     <select id="category" name="category" class="form-select @error('category') is-invalid @enderror">
                                         @foreach(\App\Models\Category::all() as $category)
                                             <option value="{{$category->id}}" {{old('category') == $category->id ? 'selected' : ''}}>{{$category->title}}</option>
@@ -30,17 +30,15 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="photo">Post Image</label>
+                                    <label for="photo" class="form-label">Photo</label>
                                     <input type="file" id="photo" value="{{old('photo')}}" name="photo[]" multiple class="form-control @error('photo') is-invalid @enderror">
                                     @error('photo')
                                     <p class="text-danger small">{{$message}}</p>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="description">Post Title</label>
-                                    <textarea type="text" id="description" rows="10" name="description" class="form-control @error('description') is-invalid @enderror">
-                                        {{old('description')}}
-                                    </textarea>
+                                    <label for="description" class="form-label">Post Description</label>
+                                    <textarea id="description" rows="10" name="description" class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
                                     @error('description')
                                     <p class="text-danger small">{{$message}}</p>
                                     @enderror

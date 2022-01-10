@@ -50,7 +50,7 @@
                             @forelse($posts as $post)
                                 <tr>
                                     <td>{{$post->id}}</td>
-                                    <td class="w-25 small">{{Str::words($post->title,10,'...')}}</td>\
+                                    <td class="w-25 small">{{Str::words($post->title,10,'...')}}</td>
                                     <td>
                                         @forelse($post->photos as $photo)
                                             <img src="{{asset('storage/photo/'.$photo->name)}}" height="30" alt="">
