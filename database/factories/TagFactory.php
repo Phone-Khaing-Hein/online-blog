@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CategoryFactory extends Factory
+class TagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,7 +15,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'title'=>$this->faker->word(),
+            "title"=>$this->faker->word(),
             "user_id"=>User::inRandomOrder()->first()->id,
         ];
     }

@@ -33,6 +33,21 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">Select Tag</label>
+                            <br>
+                            @foreach(\App\Models\Tag::all() as $tag)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" form="editForm" type="checkbox" value="{{$tag->id}}" name="tags[]" id="flexCheckDefault{{$tag->id}}" {{in_array($tag->id,old('tags',$post->tags->pluck('id')->toArray())) ? 'checked' : ''}}>
+                                    <label class="form-check-label" for="flexCheckDefault{{$tag->id}}">
+                                        {{$tag->title}}
+                                    </label>
+                                </div>
+                            @endforeach
+                            @error('tags')
+                            <p class="text-danger small">{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label mb-0">Photo</label>
                             <div class="border rounded d-flex gap-1 overflow-scroll p-3">
                                     <form action="{{route('photo.store')}}" method="post" enctype="multipart/form-data" class="mb-3 d-none" id="photoUploadForm">

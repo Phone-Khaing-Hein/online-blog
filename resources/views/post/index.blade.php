@@ -39,6 +39,7 @@
                                 <th>Photo</th>
                                 <th>Is Publish</th>
                                 <th>Category</th>
+                                <th>Tags</th>
                                 <th>Owner</th>
                                 <th>Control</th>
                                 <th>Created</th>
@@ -66,7 +67,17 @@
                                             </label>
                                         </div>
                                     </td>
-                                    <td class="text-nowrap">{{$post->category->title ?? 'Unknown Category'}}</td>
+                                    <td class="text-nowrap">
+                                        {{$post->category->title ?? 'Unknown Category'}}
+                                    </td>
+                                    <td>
+                                        @foreach($post->tags as $tag)
+                                            <span class="badge rounded-pill bg-primary">
+                                                <i class="fas fa-hashtag"></i>
+                                                {{$tag->title}}
+                                            </span>
+                                        @endforeach
+                                    </td>
                                     <td class="text-nowrap">{{$post->user->name ?? 'Unknown User'}}</td>
                                     <td class="text-nowrap">
                                         <div class="btn-group">

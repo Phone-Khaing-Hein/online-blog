@@ -50,7 +50,9 @@ class PostController extends Controller
             'category'=>"required|integer|exists:categories,id",
             'description'=>"required|min:10",
             'photo'=>'nullable',
-            'photo.*'=>'file|mimes:jpg,jpeg,png'
+            'photo.*'=>'file|mimes:jpg,jpeg,png',
+            'tags'=>"required",
+            'tags.*'=>"integer|exists:tags,id"
         ]);
 
         $post = new Post();
@@ -62,6 +64,9 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->is_publish = true;
         $post->save();
+
+        //save tags to pivot table
+        $post->tags()->attach($request->tags);
 
         if (!Storage::exists('public/thumbnail')){
             Storage::makeDirectory('public/thumbnail');
@@ -134,6 +139,12 @@ class PostController extends Controller
         $post->category_id = $request->category;
         $post->update();
 
+        //delete from pivot
+        $post->tags()->detach();
+
+        //save tags to pivot table
+        $post->tags()->attach($request->tags);
+
         return redirect()->route('post.index')->with('status',$request->title.' updated successfully');
     }
 
@@ -152,6 +163,8 @@ class PostController extends Controller
         }
         //delete photos from db
         $post->photos()->delete();
+        //delete from pivot
+        $post->tags()->detach();
 
         $post->delete();
         return redirect()->route('post.index')->with('status','deleted successfully');
