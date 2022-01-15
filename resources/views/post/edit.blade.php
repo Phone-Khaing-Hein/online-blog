@@ -53,9 +53,9 @@
                                     <form action="{{route('photo.store')}}" method="post" enctype="multipart/form-data" class="mb-3 d-none" id="photoUploadForm">
                                         @csrf
                                         <div class="mb-3">
-                                            <label for="photoInput">Post Image</label>
+                                            <label class="form-label">Post Image</label>
                                             <input type="hidden" name="post_id" value="{{$post->id}}">
-                                            <input type="file" id="photoInput" value="{{old('photo')}}" name="photo[]" multiple class="form-control @error('photo') is-invalid @enderror">
+                                            <input type="file" id="photoInput" value="{{old('photo')}}" name="photo[]" class="form-control @error('photo') is-invalid @enderror" multiple>
                                             @error('photo')
                                             <p class="text-danger small">{{$message}}</p>
                                             @enderror

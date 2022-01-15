@@ -12,4 +12,8 @@ class Category extends Model
     public function user(){
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function photos(){
+        return $this->hasManyThrough(Photo::class,Post::class);
+    }
 }
