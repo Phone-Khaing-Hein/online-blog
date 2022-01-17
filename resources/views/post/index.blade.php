@@ -49,9 +49,12 @@
                             @forelse($posts as $post)
                                 <tr>
                                     <td>{{$post->id}}</td>
-                                    <td class="w-25 small">{{Str::words($post->title,10,'...')}}</td>
+                                    <td class="w-25 small">{{$post->short_title}}</td>
                                     <td>
-                                        @forelse($post->photos()->latest('id')->limit(3)->get() as $photo)
+                                        @forelse($post->photos as $key=>$photo)
+                                            @if($key==3)
+                                                @break
+                                            @endif
                                             <a class="venobox list-thumbnail" data-gall="img{{$post->id}}" href="{{asset('storage/photo/'.$photo->name)}}">
                                                 <img src="{{asset('storage/thumbnail/'.$photo->name)}}" height="30" class="rounded-circle border border-white shadow-sm" alt="image alt"/>
                                             </a>
@@ -97,11 +100,7 @@
                                         </form>
                                     </td>
                                     <td class="text-nowrap">
-                                        <i class="fas fa-calendar"></i>
-                                        {{$post->created_at->format("d-m-Y")}}
-                                        <br>
-                                        <i class="fas fa-clock"></i>
-                                        {{$post->created_at->format("h:i a")}}
+                                        {!!$post->show_time!!}
                                     </td>
                                 </tr>
 

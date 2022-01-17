@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -20,10 +21,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::when(isset(request()->search),function($query){
-            $search = request()->search;
-            $query->where('title','LIKE',"%$search%")->orwhere('description','LIKE',"%$search%");
-        })->latest('id')->paginate(5);
+        $posts = Post::search()->latest('id')->paginate(5);
         return view('post.index',compact('posts'));
     }
 
@@ -54,10 +52,13 @@ class PostController extends Controller
             'tags'=>"required",
             'tags.*'=>"integer|exists:tags,id"
         ]);
+        DB::transaction(function() use ($request){
+
+
 
         $post = new Post();
         $post->title = $request->title;
-        $post->slug = Str::slug($request->title);
+        $post->slug = $request->title;
         $post->description = $request->description;
         $post->excerpt = Str::words($request->description,15,'...');
         $post->category_id = $request->category;
@@ -91,6 +92,7 @@ class PostController extends Controller
                 $photo->save();
             }
         }
+        });
 
         return redirect()->route('post.index')->with('status',$request->title.' created successfully');
     }
