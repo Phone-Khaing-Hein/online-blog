@@ -13,14 +13,8 @@
                             @csrf
                             @method('put')
                         </form>
+                        <x-input inputTitle="Post Title" name="title" value="{{$post->title}}" form="editForm"/>
 
-                        <div class="mb-3">
-                            <label for="title">Post Title</label>
-                            <input type="text" id="title" form="editForm" value="{{old('title',$post->title)}}" name="title" class="form-control @error('title') is-invalid @enderror">
-                            @error('title')
-                                <p class="text-danger small">{{$message}}</p>
-                            @enderror
-                        </div>
                         <div class="mb-3">
                             <label for="category">Category</label>
                             <select id="category" name="category" form="editForm" class="form-select @error('category') is-invalid @enderror">

@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <x-alert type="success" />
+                    <x-alert type="danger" message="hello" />
+                    <x-alert>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consectetur doloribus eveniet, ex libero, maiores molestiae nihil officia rerum sint sunt voluptatum? Aspernatur autem dolor error in laboriosam vel voluptatibus.
+                    </x-alert>
                 </div>
             </div>
         </div>

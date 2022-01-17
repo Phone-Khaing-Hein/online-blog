@@ -11,13 +11,7 @@
                     <div class="card-body">
                         <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Post Title</label>
-                                    <input type="text" id="title" value="{{old('title')}}" name="title" class="form-control @error('title') is-invalid @enderror">
-                                    @error('title')
-                                    <p class="text-danger small">{{$message}}</p>
-                                    @enderror
-                                </div>
+                                <x-input inputTitle="Post Title" name="title" />
                                 <div class="mb-3">
                                     <label for="category" class="form-label">Category</label>
                                     <select id="category" name="category" class="form-select @error('category') is-invalid @enderror">

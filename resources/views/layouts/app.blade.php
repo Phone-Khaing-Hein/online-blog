@@ -32,7 +32,7 @@
                     @auth
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{route('home') == request()->url() ? 'active' : ''}}" aria-current="page" href="{{ route('home') }}">Home</a>
+                            <x-nav-link routeName="{{route('home')}}">Home</x-nav-link>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{route('category.create') == request()->url() ? 'active' : ''}}" aria-current="page" href="{{ route('category.create') }}">Create Category</a>
